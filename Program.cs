@@ -5,9 +5,11 @@ using Itinero.Osm.Vehicles;
 // Download map data from http://download.geofabrik.de/ and put in project folder. Can just download europe -> denmark
 // Maybe change file names in code...
 
-// Run this the first time to generate .routerdb file, takes a while
-//GenerateRouterDB();
-
+string routerDbPath = "..\\..\\..\\db.routerdb";
+if (!File.Exists(routerDbPath))
+{
+    GenerateRouterDB();
+}
 
 
 var startPoint = new Itinero.LocalGeo.Coordinate(56.04748f, 9.94281f);
@@ -32,7 +34,7 @@ void GenerateRouterDB()
     }
 
     Console.WriteLine("Writing .routerdb file");
-    using (var stream = new FileInfo(@"..\..\..\denmark.routerdb").Open(FileMode.Create))
+    using (var stream = new FileInfo(@"..\..\..\db.routerdb").Open(FileMode.Create))
     {
         routerDb.Serialize(stream);
     }
@@ -46,7 +48,7 @@ void GenerateRoute(Itinero.LocalGeo.Coordinate startPoint, Itinero.LocalGeo.Coor
 
     // Opening .routerdb
     RouterDb routerDb;
-    using (var stream = new FileInfo(@"..\..\..\denmark.routerdb").OpenRead())
+    using (var stream = new FileInfo(@"..\..\..\db.routerdb").OpenRead())
     {
         routerDb = RouterDb.Deserialize(stream);
     }
