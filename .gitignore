@@ -13,6 +13,7 @@
 # Large map data
 *.osm.pbf
 *.routerdb
+/route.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
