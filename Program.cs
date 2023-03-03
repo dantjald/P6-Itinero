@@ -2,18 +2,21 @@
 using Itinero.IO.Osm;
 using Itinero.Osm.Vehicles;
 
-// Download map data from http://download.geofabrik.de/ and put in project folder. 
+// Download map data from http://download.geofabrik.de/ and put in project folder. Can just download europe -> denmark
 // Maybe change file names in code...
 
-
-// Run this the first time to generate .routerdb file
+// Run this the first time to generate .routerdb file, takes a while
 //GenerateRouterDB();
 
-var startPoint = new Itinero.LocalGeo.Coordinate(57.04748f, 9.94281f);
+
+
+var startPoint = new Itinero.LocalGeo.Coordinate(56.04748f, 9.94281f);
 var endPoint = new Itinero.LocalGeo.Coordinate(57.01229f, 9.99261f);
 var travelMethod = Vehicle.Pedestrian;
 
 GenerateRoute(startPoint, endPoint, travelMethod);
+
+// Paste generated route.json file content into geojson.io to show route
 
 
 
