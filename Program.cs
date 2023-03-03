@@ -2,6 +2,10 @@
 using Itinero.IO.Osm;
 using Itinero.Osm.Vehicles;
 
+// Download map data from http://download.geofabrik.de/ and put in project folder. 
+// Maybe change file names in code...
+
+
 // Run this the first time to generate .routerdb file
 //GenerateRouterDB();
 
@@ -18,14 +22,14 @@ void GenerateRouterDB()
     var routerDb = new RouterDb();
     Itinero.Profiles.Vehicle[] vehicles = { Vehicle.Car, Vehicle.Pedestrian, Vehicle.Bicycle };
 
-    Console.WriteLine("Loading .osm data");
-    using (var stream = new FileInfo(@"C:\Users\danpa\Programmering\P6\P6\denmark.osm.pbf").OpenRead())
+    Console.WriteLine("Loading .osm.pbf data");
+    using (var stream = new FileInfo(@"..\..\..\denmark.osm.pbf").OpenRead())
     {
         routerDb.LoadOsmData(stream, vehicles);
     }
 
     Console.WriteLine("Writing .routerdb file");
-    using (var stream = new FileInfo(@"C:\Users\danpa\Programmering\P6\P6\denmark.routerdb").Open(FileMode.Create))
+    using (var stream = new FileInfo(@"..\..\..\denmark.routerdb").Open(FileMode.Create))
     {
         routerDb.Serialize(stream);
     }
