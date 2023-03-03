@@ -25,13 +25,16 @@ GenerateRoute(startPoint, endPoint, travelMethod);
 void GenerateRouterDB()
 {
     var routerDb = new RouterDb();
-    Itinero.Profiles.Vehicle[] vehicles = { Vehicle.Car, Vehicle.Pedestrian, Vehicle.Bicycle };
+    Itinero.Profiles.Vehicle[] vehicles = { Vehicle.Pedestrian };
 
     Console.WriteLine("Loading .osm.pbf data");
-    using (var stream = new FileInfo(@"..\..\..\denmark.osm.pbf").OpenRead())
+    using (var stream = new FileInfo(@"..\..\..\denmark-latest.osm.pbf").OpenRead())
     {
         routerDb.LoadOsmData(stream, vehicles);
     }
+    //routerDb.AddContracted(routerDb.GetSupportedProfile("car"));
+    //routerDb.AddContracted(routerDb.GetSupportedProfile("pedestrian"));
+    //routerDb.AddContracted(routerDb.GetSupportedProfile("bicycle"));
 
     Console.WriteLine("Writing .routerdb file");
     using (var stream = new FileInfo(@"..\..\..\db.routerdb").Open(FileMode.Create))
